@@ -8,7 +8,7 @@ const Signup = ({ setShowLogin }) => {
   };
 
   const signup = async () => {
-    const res = await fetch("http://localhost:3000/signup", {
+    const res = await fetch("https://your-app.onrender.com/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

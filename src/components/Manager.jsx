@@ -15,7 +15,7 @@ const getPasswords = async () => {
   try {
     const token = localStorage.getItem("token");
 
-    let req = await fetch("http://localhost:3000/", {
+    let req = await fetch("https://your-app.onrender.com", {
       headers: {
         Authorization: token  
       }
@@ -76,7 +76,7 @@ const savePassword = async () => {
       //if any such id exists in the db then delete it
      
       if(form.id){
-        await fetch("http://localhost:3000/",{
+        await fetch("https://your-app.onrender.com",{
           method:"DELETE",
            headers: {
     "Content-Type": "application/json",
@@ -91,7 +91,7 @@ const savePassword = async () => {
 
       setpasswordArray([...passwordArray, {...form, id: newId}]);
 
-     await fetch("http://localhost:3000/", {
+     await fetch("https://your-app.onrender.com", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -132,7 +132,7 @@ const savePassword = async () => {
     if (c) {
       setpasswordArray(passwordArray.filter((item) => item.id !== id));
       // localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item=>item.id!==id)));
-      let res = await fetch("http://localhost:3000/", {
+      let res = await fetch("https://your-app.onrender.com", {
   method: "DELETE",
   headers: {
     "Content-Type": "application/json",
