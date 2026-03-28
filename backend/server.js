@@ -2,23 +2,22 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
-const bodyparser = require("body-parser");
+const bodyParser = require("body-parser");
 
 const authRoutes = require("./routes/authRoutes");
 const passwordRoutes = require("./routes/passwordRoutes");
 
-const app = express();   
+const app = express();
 
-// middleware
+// CORS 
 app.use(cors({
-  origin: "https://passop-flame.vercel.app", 
+  origin: "https://passop-flame.vercel.app",
   methods: ["GET", "POST", "DELETE", "PUT"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+  credentials: true
 }));
 
-app.options("*", cors());
 
-app.use(bodyparser.json());
+app.use(bodyParser.json());
 
 // routes
 app.use("/", authRoutes);
