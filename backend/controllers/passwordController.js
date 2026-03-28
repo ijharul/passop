@@ -48,7 +48,7 @@ const addPassword = async (req, res) => {
     // ENCRYPT
     const encryptedPassword = CryptoJS.AES.encrypt(
       data.password,
-      process.env.SECRET_KEY   // 🔥 SAME KEY
+      process.env.SECRET_KEY   
     ).toString();
 
     await collection.insertOne({
