@@ -1,16 +1,120 @@
-# React + Vite
+# 🔐 PassOP - Password Manager (MERN Stack)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PassOP is a secure password manager web application built using the MERN stack. It allows users to store, manage, and access their passwords safely with authentication.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌐 Live Demo
 
-## React Compiler
+* Frontend: https://passop-flame.vercel.app
+* Backend API: https://passop-8ewz.onrender.com
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ⚙️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* Frontend: React, Tailwind CSS
+* Backend: Node.js, Express.js
+* Database: MongoDB Atlas
+* Authentication: JWT
+* Deployment: Vercel (Frontend), Render (Backend)
+
+---
+
+## ✨ Features
+
+* 🔑 User Authentication (Signup/Login)
+* 🔒 Secure password storage
+* 📋 Add, view, and delete passwords
+* 🌐 Fully responsive UI
+* ⚡ Fast and optimized experience
+
+---
+
+## 📁 Project Structure
+
+```
+passop/
+├── frontend/
+│   ├── src/
+│   └── components/
+├── backend/
+│   ├── routes/
+│   ├── controllers/
+│   └── server.js
+```
+
+---
+
+## 🔧 Installation & Setup
+
+### 1. Clone the repository
+
+```
+git clone https://github.com/ijharul/passop.git
+cd passop
+```
+
+---
+
+### 2. Setup Backend
+
+```
+cd backend
+npm install
+```
+
+Create `.env` file:
+
+```
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+PORT=3000
+```
+
+Run backend:
+
+```
+node server.js
+```
+
+---
+
+### 3. Setup Frontend
+
+```
+cd frontend
+npm install
+npm run dev
+```
+
+---
+
+## 🚀 Deployment
+
+* Frontend deployed on Vercel
+* Backend deployed on Render
+* MongoDB Atlas used for cloud database
+
+---
+
+## 🧠 Learning Outcomes
+
+* Full MERN stack development
+* Authentication using JWT
+* API integration
+* Deployment on Vercel & Render
+* Debugging real-world issues (CORS, 500 errors)
+
+---
+
+## 🙌 Author
+
+* 👤 Ijharul Haque
+* 💼 Aspiring Full Stack Developer
+
+---
+
+## ⭐ Support
+
+If you like this project, give it a ⭐ on GitHub!
