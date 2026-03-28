@@ -8,7 +8,7 @@ const Signup = ({ setShowLogin }) => {
   };
 
   const signup = async () => {
-    const res = await fetch("https://your-app.onrender.com/signup", {
+    const res = await fetch("https://passop-8ewz.onrender.com/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

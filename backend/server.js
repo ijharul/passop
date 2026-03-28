@@ -11,13 +11,12 @@ const app = express();
 
 // middleware
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://passop-flame.vercel.app" 
-  ],
-  methods: ["GET", "POST", "DELETE"],
+  origin: "https://passop-flame.vercel.app", 
+  methods: ["GET", "POST", "DELETE", "PUT"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
+app.options("*", cors());
 
 app.use(bodyparser.json());
 
