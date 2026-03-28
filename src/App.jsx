@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Manager from "./components/Manager";
@@ -10,16 +10,15 @@ function App() {
   const token = localStorage.getItem("token");
   const [showLogin, setShowLogin] = useState(true);
 
-  
+  useEffect(() => {
+    fetch("https://passop-8ewz.onrender.com");
+  }, []);
 
   return (
-    <div className= "flex flex-col min-h-screen">
-      
+    <div className="flex flex-col min-h-screen">
       <Navbar />
-       
-      {/* 🔥 MAIN AREA */}
+
       <div className="flex-1 bg-green-50">
-        
         {!token ? (
           <div className="flex justify-center items-center h-full pt-20">
             {showLogin ? (
@@ -31,11 +30,9 @@ function App() {
         ) : (
           <Manager />
         )}
-
       </div>
 
       <Footer />
-
     </div>
   );
 }
