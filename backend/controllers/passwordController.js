@@ -1,61 +1,85 @@
 const { connectDB } = require("../config/db");
 const CryptoJS = require("crypto-js");
 
-// ✅ GET PASSWORDS
+//  GET PASSWORDS
 const getPasswords = async (req, res) => {
-  const db = await connectDB();
-  const collection = db.collection("passwords");
+  try {
+    const db = await connectDB();
+    const collection = db.collection("passwords");
 
-  const findResult = await collection.find({
-    user: req.user.email
-  }).toArray();
+    const findResult = await collection.find({
+      user: req.user.email
+    }).toArray();
 
-  // 🔓 DECRYPT
-  const decryptedData = findResult.map(item => {
-    const bytes = CryptoJS.AES.decrypt(item.password, "secret123");
-    const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
+    // DECRYPT
+    const decryptedData = findResult.map(item => {
+      const bytes = CryptoJS.AES.decrypt(
+        item.password,
+        process.env.SECRET_KEY
+      );
+      const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
 
-    return {
-      ...item,
-      password: originalPassword
-    };
-  });
+      return {
+        ...item,
+        password: originalPassword
+      };
+    });
 
-  res.json(decryptedData);
+    res.json(decryptedData);
+
+  } catch (err) {
+    res.status(500).json({ msg: "Server error" });
+  }
 };
 
-// ✅ ADD PASSWORD
+// ADD PASSWORD
 const addPassword = async (req, res) => {
-  const data = req.body;
+  try {
+    const data = req.body;
 
-  const db = await connectDB();
-  const collection = db.collection("passwords");
+    // VALIDATION
+    if (!data.site || !data.username || !data.password) {
+      return res.json({ msg: "All fields required" });
+    }
 
-  const encryptedPassword = CryptoJS.AES.encrypt(
-    data.password,
-    "secret123"
-  ).toString();
+    const db = await connectDB();
+    const collection = db.collection("passwords");
 
-  await collection.insertOne({
-    ...data,   // 🔥 FIXED (not data.body)
-    password: encryptedPassword,
-    user: req.user.email
-  });
+    // ENCRYPT
+    const encryptedPassword = CryptoJS.AES.encrypt(
+      data.password,
+      process.env.SECRET_KEY   // 🔥 SAME KEY
+    ).toString();
 
-  res.json({ success: true });
+    await collection.insertOne({
+      ...data,
+      password: encryptedPassword,
+      user: req.user.email
+    });
+
+    res.json({ success: true });
+
+  } catch (err) {
+    res.status(500).json({ msg: "Server error" });
+  }
 };
 
-// ✅ DELETE PASSWORD
+// DELETE PASSWORD
 const deletePassword = async (req, res) => {
-  const db = await connectDB();
-  const collection = db.collection("passwords");
+  try {
+    const db = await connectDB();
+    const collection = db.collection("passwords");
 
-  await collection.deleteOne({
-    id: req.body.id,
-    user: req.user.email
-  });
+    await collection.deleteOne({
+      id: req.body.id,
+      user: req.user.email
+    });
 
-  res.json({ success: true });
+    res.json({ success: true });
+
+  } catch (err) {
+    res.status(500).json({ msg: "Server error" });
+  }
 };
 
 module.exports = {
