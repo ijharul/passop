@@ -1,12 +1,37 @@
 import React, { useState } from "react";
 import { UserPlus, Mail, Lock, Loader2, ArrowRight, User } from "lucide-react";
 import { toast } from "react-toastify";
+import { GoogleLogin } from '@react-oauth/google';
 
 const API_URL = import.meta.env.VITE_API_URL || "https://passop-8ewz.onrender.com";
 
 const Signup = ({ setShowView }) => {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [loading, setLoading] = useState(false);
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    setLoading(true);
+    try {
+      const res = await fetch(`${API_URL}/google-login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: credentialResponse.credential })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem("token", data.token);
+        sessionStorage.setItem("masterPassword", credentialResponse.credential.slice(-10));
+        sessionStorage.setItem("userEmail", data.email);
+        sessionStorage.setItem("isLocked", "false");
+        toast.success("Account created via Google!");
+        setTimeout(() => window.location.href = "/", 1000);
+      }
+    } catch (err) {
+      toast.error("Google Initialization Failed");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,10 +73,12 @@ const Signup = ({ setShowView }) => {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider ml-0.5">Full Name</label>
+            <label htmlFor="signup-name" className="text-xs font-semibold text-slate-400 uppercase tracking-wider ml-0.5">Full Name</label>
             <div className="relative">
               <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-slate-500" />
               <input
+                id="signup-name"
+                name="name"
                 type="text"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -63,10 +90,12 @@ const Signup = ({ setShowView }) => {
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider ml-0.5">Email Address</label>
+            <label htmlFor="signup-email" className="text-xs font-semibold text-slate-400 uppercase tracking-wider ml-0.5">Email Address</label>
             <div className="relative">
               <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-slate-500" />
               <input
+                id="signup-email"
+                name="email"
                 type="email"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -78,10 +107,12 @@ const Signup = ({ setShowView }) => {
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider ml-0.5">Set Master Key</label>
+            <label htmlFor="signup-password" className="text-xs font-semibold text-slate-400 uppercase tracking-wider ml-0.5">Set Master Key</label>
             <div className="relative">
               <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-slate-500" />
               <input
+                id="signup-password"
+                name="password"
                 type="password"
                 value={form.password}
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
@@ -106,6 +137,24 @@ const Signup = ({ setShowView }) => {
               </>
             )}
           </button>
+
+          <div className="relative flex items-center py-1">
+            <div className="flex-grow border-t border-white/5"></div>
+            <span className="flex-shrink mx-4 text-[10px] font-bold text-slate-600 uppercase tracking-widest">Social Identity</span>
+            <div className="flex-grow border-t border-white/5"></div>
+          </div>
+
+          <div className="flex justify-center w-full">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={() => toast.error("Google Sign-In Failed")}
+              theme="filled_black"
+              shape="pill"
+              size="large"
+              useOneTap={false}
+              ux_mode="popup"
+            />
+          </div>
         </form>
 
         <div className="mt-8 pt-6 border-t border-white/5 text-center">

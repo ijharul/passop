@@ -4,7 +4,7 @@ const { hashPassword, comparePassword } = require("../utils/cryptoUtils");
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-const signup = async (email, password) => {
+const signup = async (name, email, password) => {
   const db = await connectDB();
   const users = db.collection("users");
 
@@ -13,6 +13,7 @@ const signup = async (email, password) => {
 
   const hashedPassword = await hashPassword(password);
   await users.insertOne({
+    name,
     email,
     password: hashedPassword,
     provider: "local",
@@ -42,6 +43,16 @@ const login = async (email, password) => {
   return { token };
 };
 
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_APP_PASSWORD,
+  },
+});
+
 const forgotPassword = async (email) => {
   const db = await connectDB();
   const users = db.collection("users");
@@ -54,11 +65,29 @@ const forgotPassword = async (email) => {
 
   await users.updateOne({ email }, { $set: { resetToken: token, resetExpires: expires } });
 
-  console.log("------------------------------------------");
-  console.log(`RESET LINK FOR ${email}: http://localhost:5173/reset-password?token=${token}&email=${email}`);
-  console.log("------------------------------------------");
+  const resetLink = `${process.env.FRONTEND_URL || "http://localhost:5173"}/reset-password?token=${token}&email=${email}`;
 
-  return { msg: "Reset link generated (Check Console)" };
+  const mailOptions = {
+    from: `"VaultX Security" <${process.env.GMAIL_USER}>`,
+    to: email,
+    subject: "VaultX Master Key Reset Protocol",
+    html: `
+      <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; background-color: #020617; color: white; border-radius: 12px; border: 1px solid #1e293b;">
+        <h1 style="color: #10b981;">VaultX Security</h1>
+        <p style="color: #94a3b8;">A request was made to reset your Master Key protocol.</p>
+        <div style="margin: 30px 0; padding: 20px; background-color: #0f172a; border-radius: 8px; border: 1px solid #1e293b; text-align: center;">
+          <a href="${resetLink}" style="background-color: #10b981; color: #020617; padding: 12px 24px; text-decoration: none; font-weight: bold; border-radius: 6px; display: inline-block;">
+            Reset Master Key
+          </a>
+        </div>
+        <p style="font-size: 12px; color: #64748b;">If you did not request this, please ignore this email. This link will expire in 1 hour.</p>
+      </div>
+    `,
+  };
+
+  await transporter.sendMail(mailOptions);
+
+  return { msg: "Security link sent to your email!" };
 };
 
 const resetPassword = async (email, token, newPassword) => {

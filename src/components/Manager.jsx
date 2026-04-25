@@ -171,26 +171,28 @@ const Manager = () => {
       <div className="bg-[#0f172a] border border-white/10 rounded-2xl p-8 shadow-2xl mb-16">
         <form onSubmit={savePassword} className="space-y-6">
           <div className="space-y-2">
-            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Website URL</label>
+            <label htmlFor="vault-site" className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Website URL</label>
             <div className="relative group">
               <Globe className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-slate-500 group-focus-within:text-emerald-500 transition-colors" />
-              <input
-                name="site"
-                value={form.site}
-                onChange={(e) => setform({ ...form, site: e.target.value })}
-                placeholder="e.g. google.com"
-                className="w-full h-12 bg-[#1e293b] border border-white/10 rounded-xl pl-12 pr-4 text-sm text-white focus:outline-none focus:border-emerald-500/50 focus:ring-4 focus:ring-emerald-500/5 transition-all"
-                required
-              />
+                <input
+                  id="vault-site"
+                  name="site"
+                  value={form.site}
+                  onChange={(e) => setform({ ...form, site: e.target.value })}
+                  placeholder="e.g. google.com"
+                  className="w-full h-12 bg-[#1e293b] border border-white/10 rounded-xl pl-12 pr-4 text-sm text-white focus:outline-none focus:border-emerald-500/50 focus:ring-4 focus:ring-emerald-500/5 transition-all"
+                  required
+                />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Username / Email</label>
+              <label htmlFor="vault-username" className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Username / Email</label>
               <div className="relative group">
                 <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-slate-500 group-focus-within:text-emerald-500 transition-colors" />
                 <input
+                  id="vault-username"
                   name="username"
                   value={form.username}
                   onChange={(e) => setform({ ...form, username: e.target.value })}
@@ -202,10 +204,11 @@ const Manager = () => {
             </div>
 
             <div className="space-y-2">
-              <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Access Secret</label>
+              <label htmlFor="vault-password" className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Access Secret</label>
               <div className="relative group">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-slate-500 group-focus-within:text-emerald-500 transition-colors" />
                 <input
+                  id="vault-password"
                   name="password"
                   type="text"
                   value={form.password}
