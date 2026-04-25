@@ -10,10 +10,13 @@ const {
   addPassword,
   deletePassword
 } = require("../controllers/passwordController");
+const { checkPasswordBreach } = require("../controllers/breachController");
+const { validatePasswordEntry } = require("../middleware/validate");
 
-// outes
-router.get("/", auth, getPasswords);
-router.post("/", auth, addPassword);
-router.delete("/", auth, deletePassword);
+// routes
+router.get("/getpasswords", auth, getPasswords);
+router.post("/savepassword", auth, validatePasswordEntry, addPassword);
+router.delete("/deletepassword", auth, deletePassword);
+router.post("/check-breach", auth, checkPasswordBreach);
 
 module.exports = router;
