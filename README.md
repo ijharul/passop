@@ -1,120 +1,73 @@
-# 🔐 PassOP - Password Manager (MERN Stack)
+# 🛡️ VaultX - Enterprise-Grade Password Security
 
-PassOP is a secure password manager web application built using the MERN stack. It allows users to store, manage, and access their passwords safely with authentication.
-
----
-
-## 🌐 Live Demo
-
-* Frontend: https://passop-flame.vercel.app
-* Backend API: https://passop-8ewz.onrender.com
+VaultX is a high-performance, professional-grade SaaS password manager designed for extreme security and minimalism. Built on the MERN stack with zero-knowledge architecture, it ensures your secrets never leave your browser unencrypted.
 
 ---
 
-## ⚙️ Tech Stack
+## 🌐 Live Infrastructure
 
-* Frontend: React, Tailwind CSS
-* Backend: Node.js, Express.js
-* Database: MongoDB Atlas
-* Authentication: JWT
-* Deployment: Vercel (Frontend), Render (Backend)
+*   **Vault Terminal (Frontend)**: [https://passop-flame.vercel.app](https://passop-flame.vercel.app)
+*   **Security Core (Backend)**: [https://passop-8ewz.onrender.com](https://passop-8ewz.onrender.com)
 
 ---
 
-## ✨ Features
+## ✨ Advanced Features
 
-* 🔑 User Authentication (Signup/Login)
-* 🔒 Secure password storage
-* 📋 Add, view, and delete passwords
-* 🌐 Fully responsive UI
-* ⚡ Fast and optimized experience
+### 🔐 Zero-Knowledge Encryption
+*   **Client-Side AES-256**: All passwords are encrypted locally using your Master Key before reaching the database.
+*   **Master Key Protocol**: Your Master Key is never stored on any server, ensuring only you have access.
+
+### 🛡️ Real-Time Security
+*   **Auto-Lock Engine**: The vault automatically locks after **60 seconds of inactivity** to prevent unauthorized physical access.
+*   **Breach Detection**: Integrated with HaveIBeenPwned API to check if your passwords have been leaked in public breaches.
+*   **Secure Generator**: One-click high-entropy password generation.
+
+### 🌐 Unified Authentication
+*   **Social Sign-In**: Instant access using Google OAuth 2.0 with permanent secure encryption keys.
+*   **Master Key Recovery**: Secure, time-limited reset links delivered via real-time SMTP (Nodemailer).
+
+### 🎨 Premium User Experience
+*   **SaaS Dashboard**: A minimalist "Bitwarden-style" interface with glassmorphism and smooth `framer-motion` animations.
+*   **Fully Responsive**: Engineered for perfect security on Desktop, Tablet, and Mobile.
 
 ---
 
-## 📁 Project Structure
+## ⚙️ Engineering Stack
 
-```
+*   **Frontend**: React 18, Tailwind CSS, Lucide Icons, Framer Motion
+*   **Backend**: Node.js, Express.js, JWT, Nodemailer
+*   **Database**: MongoDB Atlas (Encrypted Clusters)
+*   **Infrastructure**: Vercel (Frontend), Render (Backend)
+
+---
+
+## 📁 Repository Architecture
+
+```text
 passop/
-├── frontend/
-│   ├── src/
-│   └── components/
-├── backend/
-│   ├── routes/
-│   ├── controllers/
-│   └── server.js
+├── src/                # React components & UI logic
+│   ├── components/     # Vault, Lock, Auth & Navigation
+│   └── App.jsx         # Global state & security timer
+├── backend/            # Express security layer
+│   ├── routes/         # Auth & Data endpoints
+│   ├── controllers/    # Business logic
+│   └── services/       # Database & Email services
+└── vercel.json         # SPA routing configuration
 ```
 
 ---
 
-## 🔧 Installation & Setup
+## 🔧 Deployment Configuration
 
-### 1. Clone the repository
-
-```
-git clone https://github.com/ijharul/passop.git
-cd passop
-```
-
----
-
-### 2. Setup Backend
-
-```
-cd backend
-npm install
-```
-
-Create `.env` file:
-
-```
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
-PORT=3000
-```
-
-Run backend:
-
-```
-node server.js
-```
+### Environment Variables (.env)
+Required for full functionality:
+*   `VITE_API_URL`: Backend service endpoint
+*   `VITE_GOOGLE_CLIENT_ID`: Google OAuth ID
+*   `GMAIL_USER`: SMTP sender email
+*   `GMAIL_APP_PASSWORD`: Secure 16-character SMTP token
+*   `FRONTEND_URL`: Production frontend address
 
 ---
 
-### 3. Setup Frontend
-
-```
-cd frontend
-npm install
-npm run dev
-```
-
----
-
-## 🚀 Deployment
-
-* Frontend deployed on Vercel
-* Backend deployed on Render
-* MongoDB Atlas used for cloud database
-
----
-
-## 🧠 Learning Outcomes
-
-* Full MERN stack development
-* Authentication using JWT
-* API integration
-* Deployment on Vercel & Render
-* Debugging real-world issues (CORS, 500 errors)
-
----
-
-## 🙌 Author
-
-* 👤 Ijharul Haque
-* 💼 Aspiring Full Stack Developer
-
----
-
-## ⭐ Support
-
-If you like this project, give it a ⭐ on GitHub!
+## 👨‍💻 Built with ❤️ by IJHARUL
+*Precision engineered for the next generation of digital privacy.*
