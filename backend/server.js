@@ -15,13 +15,19 @@ app.use(apiLimiter);
 
 // CORS 
 app.use(cors({
-  origin: [
-    "https://passop-flame.vercel.app", 
-    "http://localhost:5173", 
-    "http://localhost:5174",
-    "http://localhost:5175",
-    "http://localhost:5176"
-  ],
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      "http://localhost:5173",
+      "http://localhost:5174",
+      "http://localhost:5175",
+      "http://localhost:5176"
+    ];
+    if (!origin || allowedOrigins.includes(origin) || origin.endsWith(".vercel.app")) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   methods: ["GET", "POST", "DELETE", "PUT"],
   credentials: true
 }));

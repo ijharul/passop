@@ -29,7 +29,7 @@ const Signup = ({ setShowView }) => {
         toast.error(data.msg || "Initialization failed");
       }
     } catch (err) {
-      toast.error("Network error. Security link compromised.");
+      toast.error("Connection failed. Please check your internet or try again later.");
     } finally {
       setLoading(false);
     }
