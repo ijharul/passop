@@ -135,7 +135,7 @@ const googleLogin = async (idToken) => {
   }
 
   const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: "7d" });
-  return { token, email, name };
+  return { token, email, name, googleId };
 };
 
 module.exports = { signup, login, forgotPassword, resetPassword, googleLogin };

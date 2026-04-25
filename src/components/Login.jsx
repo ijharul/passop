@@ -48,9 +48,9 @@ const Login = ({ setShowView }) => {
         body: JSON.stringify({ token: credentialResponse.credential })
       });
       const data = await res.json();
-      if (data.token) {
+      if (res.ok) {
         localStorage.setItem("token", data.token);
-        sessionStorage.setItem("masterPassword", credentialResponse.credential.slice(-10));
+        sessionStorage.setItem("masterPassword", data.googleId);
         sessionStorage.setItem("userEmail", data.email);
         sessionStorage.setItem("isLocked", "false");
         toast.success("Logged in with Google!");
@@ -96,7 +96,7 @@ const Login = ({ setShowView }) => {
             </label>
             <button
               type="button"
-              onClick={() => setShowView('forgot')}
+              onClick={() => setShowView('forgot-password')}
               className="text-[10px] font-bold text-emerald-500 hover:text-emerald-400 transition-colors"
             >
               FORGOT?

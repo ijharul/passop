@@ -20,7 +20,7 @@ const Signup = ({ setShowView }) => {
       const data = await res.json();
       if (res.ok) {
         localStorage.setItem("token", data.token);
-        sessionStorage.setItem("masterPassword", credentialResponse.credential.slice(-10));
+        sessionStorage.setItem("masterPassword", data.googleId);
         sessionStorage.setItem("userEmail", data.email);
         sessionStorage.setItem("isLocked", "false");
         toast.success("Account created via Google!");

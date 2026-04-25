@@ -12,9 +12,10 @@ const ResetPassword = ({ setShowView }) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
+    const email = urlParams.get("email");
 
-    if (!token) {
-      toast.error("Invalid or missing reset token");
+    if (!token || !email) {
+      toast.error("Invalid or missing reset token/email");
       return;
     }
 
@@ -23,7 +24,7 @@ const ResetPassword = ({ setShowView }) => {
       const res = await fetch(`${API_URL}/reset-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token, password })
+        body: JSON.stringify({ email, token, newPassword: password })
       });
       const data = await res.json();
       if (res.ok) {
@@ -59,10 +60,12 @@ const ResetPassword = ({ setShowView }) => {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider ml-0.5">New Master Key</label>
+            <label htmlFor="reset-password" className="text-xs font-semibold text-slate-400 uppercase tracking-wider ml-0.5">New Master Key</label>
             <div className="relative">
               <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-slate-500" />
               <input
+                id="reset-password"
+                name="newPassword"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
