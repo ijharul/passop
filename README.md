@@ -1,73 +1,138 @@
-# 🛡️ VaultX - Enterprise-Grade Password Security
+# 🛡️ VaultX – Production-Ready Password Manager
 
-VaultX is a high-performance, professional-grade SaaS password manager designed for extreme security and minimalism. Built on the MERN stack with zero-knowledge architecture, it ensures your secrets never leave your browser unencrypted.
-
----
-
-## 🌐 Live Infrastructure
-
-*   **Vault Terminal (Frontend)**: [https://passop-flame.vercel.app](https://passop-flame.vercel.app)
-*   **Security Core (Backend)**: [https://passop-8ewz.onrender.com](https://passop-8ewz.onrender.com)
+VaultX is a secure, full-stack password manager built with the MERN stack.  
+It follows a **zero-knowledge approach** where all sensitive data is encrypted on the client side before being stored, ensuring user secrets remain private.
 
 ---
 
-## ✨ Advanced Features
+## 🌐 Live Demo
 
-### 🔐 Zero-Knowledge Encryption
-*   **Client-Side AES-256**: All passwords are encrypted locally using your Master Key before reaching the database.
-*   **Master Key Protocol**: Your Master Key is never stored on any server, ensuring only you have access.
-
-### 🛡️ Real-Time Security
-*   **Auto-Lock Engine**: The vault automatically locks after **60 seconds of inactivity** to prevent unauthorized physical access.
-*   **Breach Detection**: Integrated with HaveIBeenPwned API to check if your passwords have been leaked in public breaches.
-*   **Secure Generator**: One-click high-entropy password generation.
-
-### 🌐 Unified Authentication
-*   **Social Sign-In**: Instant access using Google OAuth 2.0 with permanent secure encryption keys.
-*   **Master Key Recovery**: Secure, time-limited reset links delivered via real-time SMTP (Nodemailer).
-
-### 🎨 Premium User Experience
-*   **SaaS Dashboard**: A minimalist "Bitwarden-style" interface with glassmorphism and smooth `framer-motion` animations.
-*   **Fully Responsive**: Engineered for perfect security on Desktop, Tablet, and Mobile.
+- **Frontend (Vercel)**: https://passop-flame.vercel.app  
+- **Backend (Render)**: https://passop-8ewz.onrender.com  
 
 ---
 
-## ⚙️ Engineering Stack
+## ✨ Key Features
 
-*   **Frontend**: React 18, Tailwind CSS, Lucide Icons, Framer Motion
-*   **Backend**: Node.js, Express.js, JWT, Nodemailer
-*   **Database**: MongoDB Atlas (Encrypted Clusters)
-*   **Infrastructure**: Vercel (Frontend), Render (Backend)
+### 🔐 Security First
+- **Client-Side Encryption**: All passwords are encrypted in the browser before being sent to the backend  
+- **Zero-Knowledge Design**: Server never sees plain-text passwords  
+- **Password Hashing**: User authentication secured using bcrypt  
+- **JWT Authentication**: Secure session handling  
+
+### 🛡️ Protection & Safety
+- **Auto-Lock System**: Vault locks after **60 seconds of inactivity**  
+- **Breach Detection**: Checks compromised credentials using HaveIBeenPwned API  
+- **Strong Password Generator**: Create secure passwords instantly  
+
+### 🔑 Authentication
+- **Email + Password Login**
+- **Google OAuth 2.0 Sign-In**
+- **Secure Password Reset via Email (Nodemailer)**
+
+### 🎨 User Experience
+- Clean **SaaS-style dashboard UI**
+- Smooth animations using **Framer Motion**
+- Fully responsive across devices
 
 ---
 
-## 📁 Repository Architecture
+## ⚙️ Tech Stack
 
-```text
+**Frontend**
+- React (Vite)
+- Tailwind CSS
+- Framer Motion
+- Lucide Icons
+
+**Backend**
+- Node.js
+- Express.js
+- JWT Authentication
+- Bcrypt
+- Nodemailer
+
+**Database**
+- MongoDB Atlas
+
+**Deployment**
+- Vercel (Frontend)
+- Render (Backend)
+
+---
+
+## 📁 Project Structure
+
+```
 passop/
-├── src/                # React components & UI logic
-│   ├── components/     # Vault, Lock, Auth & Navigation
-│   └── App.jsx         # Global state & security timer
-├── backend/            # Express security layer
-│   ├── routes/         # Auth & Data endpoints
-│   ├── controllers/    # Business logic
-│   └── services/       # Database & Email services
-└── vercel.json         # SPA routing configuration
+├── src/                  # Frontend (React)
+│   ├── components/
+│   └── App.jsx
+├── backend/              # Backend (Express)
+│   ├── routes/
+│   ├── controllers/
+│   ├── services/
+│   └── utils/
+└── vercel.json
 ```
 
 ---
 
-## 🔧 Deployment Configuration
+## 🔧 Environment Variables
 
-### Environment Variables (.env)
-Required for full functionality:
-*   `VITE_API_URL`: Backend service endpoint
-*   `VITE_GOOGLE_CLIENT_ID`: Google OAuth ID
-*   `GMAIL_USER`: SMTP sender email
-*   `GMAIL_APP_PASSWORD`: Secure 16-character SMTP token
-*   `FRONTEND_URL`: Production frontend address
+### Frontend (.env)
+- `VITE_API_URL`
+- `VITE_GOOGLE_CLIENT_ID`
+
+### Backend (.env)
+- `MONGO_URI`
+- `JWT_SECRET`
+- `GMAIL_USER`
+- `GMAIL_APP_PASSWORD`
+- `FRONTEND_URL`
 
 ---
 
-## 👨‍💻 Built with ❤️ by IJHARUL
-*Precision engineered for the next generation of digital privacy.*
+## 🚀 Run Locally
+
+```bash
+git clone https://github.com/ijharul/passop.git
+cd passop
+
+# frontend
+npm install
+npm run dev
+
+# backend
+cd backend
+npm install
+npm start
+```
+
+---
+
+## 📸 Screenshots
+
+(Add your UI screenshots here)
+
+---
+
+## 🧠 Highlights
+
+- Implemented **zero-knowledge encryption model**
+- Built **secure authentication system (JWT + OAuth)**
+- Designed **production-style UI/UX**
+- Applied **basic DevOps practices (deployment + env handling)**
+
+---
+
+## 👨‍💻 Author
+
+**Ijharul Haque**  
+Built with ❤️ for secure and modern web applications
+
+---
+
+## 📄 License
+
+This project is for educational and portfolio purposes.
