@@ -14,7 +14,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [view, setView] = useState("login");
+  const [view, setView] = useState(() => {
+    if (window.location.pathname.startsWith("/reset-password")) return "reset-password";
+    return "login";
+  });
   const [isLocked, setIsLocked] = useState(sessionStorage.getItem("isLocked") === "true");
 
   useEffect(() => {
