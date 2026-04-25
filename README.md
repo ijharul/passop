@@ -113,7 +113,13 @@ npm start
 
 ## 📸 Screenshots
 
-(Add your UI screenshots here)
+#Login and signup page
+<img width="1919" height="983" alt="Screenshot 2026-04-26 020501" src="https://github.com/user-attachments/assets/d160d088-5f1e-4126-a22b-c03981db5eea" />
+<img width="1919" height="991" alt="Screenshot 2026-04-26 020526" src="https://github.com/user-attachments/assets/a29fc238-4a63-4fb2-bb5e-c0ff5c7d195c" />
+#Landing and Home page
+<img width="1907" height="1035" alt="vaultX" src="https://github.com/user-attachments/assets/3155ec9f-5f33-431b-a9e9-6aaa874d9a35" />
+#Master Key reset page
+<img width="1919" height="981" alt="Screenshot 2026-04-26 020446" src="https://github.com/user-attachments/assets/cf08a3c3-442d-4eec-a9ef-306cd7ce5ce1" />
 
 ---
 
